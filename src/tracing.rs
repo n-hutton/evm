@@ -1,7 +1,6 @@
 //! Allows to listen to runtime events.
 
-use crate::Context;
-use evm_runtime::{CreateScheme, ExitReason, Transfer};
+use evm_runtime::{Context, CreateScheme, ExitReason, Transfer};
 use primitive_types::{H160, H256, U256};
 
 environmental::environmental!(listener: dyn EventListener + 'static);

@@ -48,12 +48,14 @@ macro_rules! step {
 			});
 
 			match $handler.pre_validate(&$self.context, opcode, stack) {
-				Ok(()) => (),
+				Ok(gas_cost) => $self.machine.set_gas_cost(gas_cost),
 				Err(e) => {
 					$self.machine.exit(e.clone().into());
 					$self.status = Err(e.into());
 				},
 			}
+
+			$self.machine.set_gas($handler.gas_left().low_u64());
 		}
 
 		match &$self.status {
